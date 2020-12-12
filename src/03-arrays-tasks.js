@@ -523,8 +523,16 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const result = [];
+  result.length = (end - start + 1);
+  let i = start - 1;
+  result.fill(1);
+  const resultT = result.map(() => {
+    i += 1;
+    return i;
+  });
+  return resultT;
 }
 
 /**
@@ -600,8 +608,6 @@ function group(/* array, keySelector, valueSelector */) {
  */
 function selectMany(/* arr, childrenSelector */) {
   throw new Error('Not implemented');
-  //   console.log(arr.flat(1));
-  //   return arr.flat(1);
 }
 
 
@@ -617,8 +623,14 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  if (indexes.length === 2) {
+    return arr[indexes[0]][indexes[1]];
+  }
+  if (indexes.length === 3) {
+    return arr[indexes[0]][indexes[1]][indexes[2]];
+  }
+  return arr[indexes[0]];
 }
 
 

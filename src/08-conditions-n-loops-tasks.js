@@ -335,8 +335,10 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let result = num.toString();
+  result = result.split('');
+  return (result.reduce((prev, curr) => parseFloat(prev) + parseFloat(curr)).toString().split('').reduce((prev, curr) => parseFloat(prev) + parseFloat(curr)));
 }
 
 
@@ -361,8 +363,21 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const result = [];
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === '[' || str[i] === '(' || str[i] === '{' || str[i] === '<') {
+      result.push(str[i]);
+    } else if ((str[i] === ']' && result[result.length - 1] === '[')
+      || (str[i] === ')' && result[result.length - 1] === '(')
+      || (str[i] === '}' && result[result.length - 1] === '{')
+      || (str[i] === '>' && result[result.length - 1] === '<')) {
+      result.splice(-1, 1);
+    } else {
+      result.push(str[i]);
+    }
+  }
+  return (result.length === 0);
 }
 
 
@@ -386,8 +401,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -464,7 +479,6 @@ function getMatrixProduct(/* m1, m2 */) {
 function evaluateTicTacToePosition(/* position */) {
   throw new Error('Not implemented');
 }
-
 
 module.exports = {
   getFizzBuzz,
